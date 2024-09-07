@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react"
 import CharacterCard from "./components/CharacterCard/CharacterCard"
 import SearchBar from "./components/SearchBar/SearchBar"
+import Modal from "./components/Modal/Modal"
+import Spinner from "./components/Spinner/Spinner"
+
 
 
 interface Character {
@@ -30,12 +33,16 @@ function App() {
   const [totalPages, setTotalPages] = useState(0)
   const [searchName, setSearchName] = useState('')
   const [searchFilters, setSearchFilters] = useState<string[]>([])
+  const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(() => {
     fetchCharacters()
   }, [page, searchName, searchFilters])
 
-  const fetchCharacters = () => {
+  const fetchCharacters = async () => {
+    setIsLoading(true)
     let url = `https://rickandmortyapi.com/api/character?page=${page}`
     if (searchName) {
       url += `&name=${searchName}`
@@ -44,16 +51,18 @@ function App() {
       url += `&${filter}=`
     })
 
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        setCharacters(data.results)
-        setTotalPages(data.info.pages)
-      })
-      .catch(() => {
-        setCharacters([])
-        setTotalPages(0)
-      })
+    try {
+      const response = await fetch(url)
+      const data = await response.json()
+      setCharacters(data.results)
+      setTotalPages(data.info.pages)
+    } catch (error) {
+      console.error("Error fetching characters:", error)
+      setCharacters([])
+      setTotalPages(0)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   const handleSearch = (name: string, filters: string[]) => {
@@ -70,38 +79,52 @@ function App() {
     if (page < totalPages) setPage(page + 1)
   }
 
+  const handleCharacterClick = (character: Character) => {
+    setSelectedCharacter(character);
+    setIsModalOpen(true);
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold text-center mb-8">
         Rick and Morty Characters
       </h1>
       <SearchBar onSearch={handleSearch} />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {characters.map((character) => (
-          <CharacterCard key={character.id} character={character} />
-        ))}
-      </div>
-      {characters.length > 0 ? (
-        <div className="mt-8 flex justify-center space-x-4">
-          <button
-            onClick={handlePrevPage}
-            disabled={page === 1}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
-          >
-            Previous
-          </button>
-          <span className="py-2">Page {page} of {totalPages}</span>
-          <button
-            onClick={handleNextPage}
-            disabled={page === totalPages}
-            className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
-          >
-            Next
-          </button>
-        </div>
+      {isLoading ? (
+        <Spinner />
       ) : (
-        <p className="text-center mt-8">No characters found.</p>
+        <>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {characters.map((character) => (
+              <div key={character.id} onClick={() => handleCharacterClick(character)} className="cursor-pointer">
+                <CharacterCard character={character} />
+              </div>
+            ))}
+          </div>
+          {characters.length > 0 && (
+            <div className="mt-8 flex justify-center space-x-4">
+              <button
+                onClick={handlePrevPage}
+                disabled={page === 1}
+                className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+              >
+                Previous
+              </button>
+              <span className="py-2">Page {page} of {totalPages}</span>
+              <button
+                onClick={handleNextPage}
+                disabled={page === totalPages}
+                className="px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300"
+              >
+                Next
+              </button>
+            </div>
+          )}
+        </>
       )}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {selectedCharacter && <CharacterCard character={selectedCharacter} />}
+      </Modal>
     </div>
   )
 }
