@@ -1,4 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
+
+interface Filters {
+  status: string[]
+  species: string[]
+  gender: string[]
+}
 
 interface Character {
   id: number
@@ -29,7 +35,7 @@ interface UseCharactersResult {
   fetchCharacters: (
     page: number,
     name: string,
-    filters: string[]
+    filters: Filters
   ) => Promise<void>
 }
 
@@ -42,7 +48,7 @@ function useCharacters(): UseCharactersResult {
   const fetchCharacters = async (
     page: number,
     name: string,
-    filters: string[]
+    filters: Filters
   ) => {
     setIsLoading(true)
     setError(null)
@@ -51,8 +57,8 @@ function useCharacters(): UseCharactersResult {
     if (name) {
       url += `&name=${name}`
     }
-    filters.forEach((filter) => {
-      url += `&${filter}=`
+    Object.entries(filters).forEach(([key, value]) => {
+      if (value.length) url += `&${key}=${value.join(',')}`
     })
 
     try {

@@ -5,6 +5,12 @@ import Modal from './components/Modal/Modal'
 import Spinner from './components/Spinner/Spinner'
 import useCharacters from './useCharacters'
 
+interface Filters {
+  status: string[];
+  species: string[];
+  gender: string[];
+}
+
 interface Character {
   id: number
   name: string
@@ -29,7 +35,11 @@ interface Character {
 function App() {
   const [page, setPage] = useState(1)
   const [searchName, setSearchName] = useState('')
-  const [searchFilters, setSearchFilters] = useState<string[]>([])
+  const [searchFilters, setSearchFilters] = useState<Filters>({
+    status: [],
+    species: [],
+    gender: []
+  })
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
     null
   )
@@ -41,8 +51,12 @@ function App() {
     fetchCharacters(page, searchName, searchFilters)
   }, [page, searchName, searchFilters])
 
-  const handleSearch = (name: string, filters: string[]) => {
+  const handleSearch = (name: string) => {
     setSearchName(name)
+    setPage(1)
+  }
+
+  const handleFilterChange = (filters: Filters) => {
     setSearchFilters(filters)
     setPage(1)
   }
@@ -65,7 +79,7 @@ function App() {
       <h1 className='text-4xl font-bold text-center mb-8'>
         Rick and Morty Characters
       </h1>
-      <SearchBar onSearch={handleSearch} />
+      <SearchBar onSearch={handleSearch} onFilterChange={handleFilterChange} />
       {isLoading ? (
         <Spinner />
       ) : error ? (
