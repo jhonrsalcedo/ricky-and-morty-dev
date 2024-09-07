@@ -46,7 +46,7 @@ function SearchBar({ onSearch }: SearchBarProps) {
                     Search
                 </button>
             </div>
-            {isFiltersOpen && (
+            <div className={`overflow-hidden transition-max-height duration-300 ease-in-out ${isFiltersOpen ? 'max-h-40' : 'max-h-0'}`}>
                 <div className="mt-2 p-2 border border-gray-300 rounded">
                     {filters.map(filter => (
                         <label key={filter} className="block">
@@ -60,7 +60,7 @@ function SearchBar({ onSearch }: SearchBarProps) {
                         </label>
                     ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 }
