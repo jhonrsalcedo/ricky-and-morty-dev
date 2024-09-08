@@ -31,6 +31,12 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
     onFilterChange(updatedFilters)
   }
 
+  const handleReset = () => {
+    setName('')
+    setSelectedFilters({ status: '', species: '', gender: '' })
+    onSearch('')
+    onFilterChange({ status: '', species: '', gender: '' })
+  }
   return (
     <div className='mb-8'>
       <div className='flex'>
@@ -59,6 +65,12 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
           className='px-4 py-2 bg-gray-200 text-gray-700 ml-2 rounded'
         >
           {showFilters ? 'Hide Filters' : 'Show Filters'}
+        </button>
+        <button
+          onClick={handleReset}
+          className='px-4 py-2 bg-red-500 text-white ml-2 rounded'
+        >
+          Reset
         </button>
       </div>
 

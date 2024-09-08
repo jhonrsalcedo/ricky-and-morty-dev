@@ -1,6 +1,7 @@
 import { CharacterCardProps } from '../../type'
 
 function CharacterCard({ character, isModal = false }: CharacterCardProps) {
+  const { image, name, status, species, gender, origin } = character
   const imageClasses = isModal
     ? 'w-full h-64 object-scale-down rounded-t-lg'
     : 'w-full h-48 object-scale-down rounded-t-lg'
@@ -14,18 +15,14 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
       }`}
     >
       <div className='w-full h-full'>
-        <img
-          src={character.image}
-          alt={character.name}
-          className={imageClasses}
-        />
+        <img src={image} alt={name} className={imageClasses} />
       </div>
       <div className={contentClasses}>
-        <h2 className='text-xl font-semibold mb-2'>{character.name}</h2>
-        <p className='text-gray-600'>Status: {character.status}</p>
-        <p className='text-gray-600'>Species: {character.species}</p>
-        <p className='text-gray-600'>Gender: {character.gender}</p>
-        <p className='text-gray-600'>Origin: {character.origin.name}</p>
+        <h2 className='text-xl font-semibold mb-2'>{name}</h2>
+        <p className='text-gray-600'>Status: {status}</p>
+        <p className='text-gray-600'>Species: {species}</p>
+        <p className='text-gray-600'>Gender: {gender}</p>
+        <p className='text-gray-600'>Origin: {origin.name}</p>
       </div>
     </div>
   )
