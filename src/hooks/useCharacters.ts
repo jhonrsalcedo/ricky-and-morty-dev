@@ -1,43 +1,5 @@
 import { useState } from 'react'
-
-interface Filters {
-  status: string
-  species: string
-  gender: string
-}
-
-interface Character {
-  id: number
-  name: string
-  status: string
-  species: string
-  type: string
-  gender: string
-  origin: {
-    name: string
-    url: string
-  }
-  location: {
-    name: string
-    url: string
-  }
-  image: string
-  episode: string[]
-  url: string
-  created: string
-}
-
-interface UseCharactersResult {
-  characters: Character[]
-  totalPages: number
-  isLoading: boolean
-  error: string | null
-  fetchCharacters: (
-    page: number,
-    name: string,
-    filters: Filters
-  ) => Promise<void>
-}
+import { UseCharactersResult, Character, Filters } from '../type'
 
 function useCharacters(): UseCharactersResult {
   const [characters, setCharacters] = useState<Character[]>([])
