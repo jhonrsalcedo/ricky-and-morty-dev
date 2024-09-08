@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 interface Filters {
-    status: string[];
-    species: string[];
-    gender: string[];
+    status: string;
+    species: string;
+    gender: string;
 }
 
 interface SearchBarProps {
@@ -12,18 +12,18 @@ interface SearchBarProps {
 }
 
 const FILTER_OPTIONS = {
-    'status': ['alive', 'dead', 'unknown'],
-    'species': ['human', 'alien'],
-    'gender': ['female', 'male', 'genderless', 'unknown']
+    'status': ['', 'alive', 'dead', 'unknown'],
+    'species': ['', 'human', 'alien', 'animal', 'humanoid', 'robot', 'unknown'],
+    'gender': ['', 'female', 'male', 'genderless', 'unknown']
 };
 
 function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
     const [name, setName] = useState('');
     const [showFilters, setShowFilters] = useState(false);
     const [selectedFilters, setSelectedFilters] = useState<Filters>({
-        status: [],
-        species: [],
-        gender: []
+        status: '',
+        species: '',
+        gender: ''
     });
 
     const handleSearch = () => {
@@ -31,16 +31,9 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
     };
 
     const handleFilterToggle = (category: keyof Filters, filter: string) => {
-        const updatedFilters = { ...selectedFilters }
-
-        if (updatedFilters[category].includes(filter)) {
-            updatedFilters[category] = updatedFilters[category].filter(f => f !== filter)
-        } else {
-            updatedFilters[category] = [...updatedFilters[category], filter]
-        }
+        const updatedFilters = { ...selectedFilters, [category]: filter }
         setSelectedFilters(updatedFilters)
         onFilterChange(updatedFilters)
-
     };
 
     return (
@@ -69,21 +62,23 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
 
             {
                 showFilters && (
-                    <div className='mt-4 p-4 bg-gray-100 rounded-md'>
+                    <div className='p-4 bg-gray-100 rounded-md flex justify-around'>
                         {
                             (Object.keys(FILTER_OPTIONS) as Array<keyof Filters>).map((category) => (
                                 <div key={category}>
-                                    <h3>{category}</h3>
-                                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                    <h3 className='font-bold mb-2 capitalize'>{category}</h3>
+                                    <div className="">
                                         {
                                             FILTER_OPTIONS[category].map((filter) => (
                                                 <label key={filter} className="flex items-center space-x-2">
                                                     <input
-                                                        type="checkbox"
-                                                        checked={selectedFilters[category].includes(filter)}
+                                                        type="radio"
+                                                        name={category}
+                                                        value={filter}
+                                                        checked={selectedFilters[category] === filter}
                                                         onChange={() => handleFilterToggle(category, filter)}
                                                     />
-                                                    <span>{filter}</span>
+                                                    <span className='capitalize'>{filter || 'any'}</span>
                                                 </label>
                                             ))
                                         }

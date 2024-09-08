@@ -3,12 +3,12 @@ import CharacterCard from './components/CharacterCard/CharacterCard'
 import SearchBar from './components/SearchBar/SearchBar'
 import Modal from './components/Modal/Modal'
 import Spinner from './components/Spinner/Spinner'
-import useCharacters from './useCharacters'
+import useCharacters from './hooks/useCharacters'
 
 interface Filters {
-  status: string[];
-  species: string[];
-  gender: string[];
+  status: string;
+  species: string;
+  gender: string;
 }
 
 interface Character {
@@ -36,9 +36,9 @@ function App() {
   const [page, setPage] = useState(1)
   const [searchName, setSearchName] = useState('')
   const [searchFilters, setSearchFilters] = useState<Filters>({
-    status: [],
-    species: [],
-    gender: []
+    status: '',
+    species: '',
+    gender: ''
   })
   const [selectedCharacter, setSelectedCharacter] = useState<Character | null>(
     null

@@ -1,9 +1,9 @@
 import { useState } from 'react'
 
 interface Filters {
-  status: string[]
-  species: string[]
-  gender: string[]
+  status: string
+  species: string
+  gender: string
 }
 
 interface Character {
@@ -58,22 +58,21 @@ function useCharacters(): UseCharactersResult {
       url += `&name=${name}`
     }
     Object.entries(filters).forEach(([key, value]) => {
-      if (value.length) url += `&${key}=${value.join(',')}`
+      if (value.length) url += `&${key}=${value}`
     })
 
     try {
       const response = await fetch(url)
       if (!response.ok) {
-        throw new Error('Failed to fetch characters')
+        throw new Error(`Failed to fetch characters: ${response.status}`)
       }
       const data = await response.json()
       setCharacters(data.results)
       setTotalPages(data.info.pages)
     } catch (error) {
-      console.error('Error fetching characters:', error)
       setCharacters([])
       setTotalPages(0)
-      setError('Failed to fetch characters. Please try again.')
+      setError((error as Error).message)
     } finally {
       setIsLoading(false)
     }
