@@ -6,9 +6,9 @@ import Spinner from './components/Spinner/Spinner'
 import useCharacters from './hooks/useCharacters'
 
 interface Filters {
-  status: string;
-  species: string;
-  gender: string;
+  status: string
+  species: string
+  gender: string
 }
 
 interface Character {
@@ -45,7 +45,8 @@ function App() {
   )
   const [isModalOpen, setIsModalOpen] = useState(false)
 
-  const { characters, totalPages, isLoading, error, fetchCharacters } = useCharacters()
+  const { characters, totalPages, isLoading, error, fetchCharacters } =
+    useCharacters()
 
   useEffect(() => {
     fetchCharacters(page, searchName, searchFilters)
@@ -102,7 +103,7 @@ function App() {
               <button
                 onClick={handlePrevPage}
                 disabled={page === 1}
-                className='px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300'
+                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium'
               >
                 Previous
               </button>
@@ -112,7 +113,7 @@ function App() {
               <button
                 onClick={handleNextPage}
                 disabled={page === totalPages}
-                className='px-4 py-2 bg-blue-500 text-white rounded disabled:bg-gray-300'
+                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium'
               >
                 Next
               </button>

@@ -12,17 +12,30 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
     <div
       className={`bg-white rounded-lg shadow-md overflow-hidden ${
         isModal ? 'flex flex-col md:flex-row' : ''
-      }`}
+      } hover:shadow-lg transition-shadow duration-300`}
     >
       <div className='w-full h-full'>
         <img src={image} alt={name} className={imageClasses} />
       </div>
       <div className={contentClasses}>
         <h2 className='text-xl font-semibold mb-2'>{name}</h2>
-        <p className='text-gray-600'>Status: {status}</p>
-        <p className='text-gray-600'>Species: {species}</p>
-        <p className='text-gray-600'>Gender: {gender}</p>
-        <p className='text-gray-600'>Origin: {origin.name}</p>
+        <p className='text-gray-500 font-medium'>
+          Status:
+          <span
+            className={`ml-1 ${
+              status === 'Alive'
+                ? 'text-green-500'
+                : status === 'Dead'
+                ? 'text-red-500'
+                : 'text-blue-500'
+            }`}
+          >
+            {status}
+          </span>
+        </p>
+        <p className='text-gray-500 font-medium'>Species: {species}</p>
+        <p className='text-gray-500 font-medium'>Gender: {gender}</p>
+        <p className='text-gray-500 font-medium'>Origin: {origin.name}</p>
       </div>
     </div>
   )
