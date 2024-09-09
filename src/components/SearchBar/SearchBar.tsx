@@ -59,6 +59,11 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
           onClick={handleSearch}
           className='px-4 py-2 bg-green-700 text-white rounded-r font-medium hover:bg-green-600'
           aria-label='Search for characters'
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch()
+            }
+          }}
         >
           Search
         </button>
@@ -71,6 +76,11 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
         <button
           onClick={handleReset}
           className='px-4 py-2 bg-red-600 text-white ml-2 rounded font-medium hover:bg-red-500'
+          onKeyUp={(e) => {
+            if (e.key === 'Enter') {
+              handleReset()
+            }
+          }}
         >
           Reset
         </button>

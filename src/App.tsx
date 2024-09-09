@@ -61,7 +61,7 @@ function App() {
         <p className='text-center text-red-500'>{error}</p>
       ) : (
         <>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
+          <article className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6'>
             {characters.map((character) => (
               <div
                 key={character.id}
@@ -77,7 +77,7 @@ function App() {
                 <CharacterCard character={character} />
               </div>
             ))}
-          </div>
+          </article>
           {characters.length > 0 && (
             <div className='mt-8 flex justify-center space-x-4'>
               <button
