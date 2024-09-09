@@ -55,27 +55,27 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
         />
         <button
           onClick={handleSearch}
-          className='px-4 py-2 bg-green-700 text-white rounded-r font-medium'
+          className='px-4 py-2 bg-green-700 text-white rounded-r font-medium hover:bg-green-600'
           aria-label='Search for characters'
         >
           Search
         </button>
         <button
           onClick={() => setShowFilters(!showFilters)}
-          className='px-4 py-2 bg-gray-200 text-gray-700 ml-2 rounded font-medium'
+          className='px-4 py-2 bg-gray-200 text-gray-700 ml-2 rounded font-medium hover:bg-gray-300'
         >
           {showFilters ? 'Hide Filters' : 'Show Filters'}
         </button>
         <button
           onClick={handleReset}
-          className='px-4 py-2 bg-red-500 text-white ml-2 rounded font-medium'
+          className='px-4 py-2 bg-red-600 text-white ml-2 rounded font-medium hover:bg-red-500'
         >
           Reset
         </button>
       </div>
 
       {showFilters && (
-        <div className='p-4 bg-gray-100 rounded-md flex justify-around'>
+        <div className='p-4 bg-gray-100 rounded-md flex justify-around mt-2'>
           {(Object.keys(FILTER_OPTIONS) as Array<keyof Filters>).map(
             (category) => (
               <div key={category}>

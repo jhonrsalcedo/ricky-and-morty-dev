@@ -22,14 +22,23 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden'
+      document.addEventListener('keydown', handleKeyDown)
     } else {
       document.body.style.overflow = 'unset'
+      document.removeEventListener('keydown', handleKeyDown)
     }
 
     return () => {
       document.body.style.overflow = 'unset'
+      document.removeEventListener('keydown', handleKeyDown)
     }
   }, [isOpen])
+
+  const handleKeyDown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose()
+    }
+  }
 
   if (!isOpen && !isAnimating) return null
 
@@ -46,18 +55,18 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
         }`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className='bg-white rounded-lg p-6 max-w-lg w-full m-4'>
+        <div className='bg-white rounded-lg p-6 max-w-lg m-4 flex flex-col'>
           <div className='flex justify-end'>
             <button
               onClick={onClose}
-              className='text-xl font-bold rounded-full w-8 h-8 flex items-center justify-center transition-opacity duration-300 hover:bg-gray-200 hover:opacity-80 relative'
+              className='text-xl font-bold rounded-full w-8 h-8 flex items-center justify-center transition-opacity duration-300 hover:bg-gray-200 hover:opacity-80 relative mb-2'
             >
               <span className='inline-block leading-none absolute bottom-2'>
                 &times;
               </span>
             </button>
           </div>
-          {children}
+          <div className='flex flex-col items-center'>{children}</div>
         </div>
       </div>
     </div>,

@@ -68,6 +68,12 @@ function App() {
                 key={character.id}
                 onClick={() => handleCharacterClick(character)}
                 className='cursor-pointer'
+                aria-label={`Character Card for ${character.name}`}
+                onKeyUp={(e) => {
+                  if (e.key === 'Enter') {
+                    handleCharacterClick(character)
+                  }
+                }}
               >
                 <CharacterCard character={character} />
               </div>
@@ -78,17 +84,17 @@ function App() {
               <button
                 onClick={handlePrevPage}
                 disabled={page === 1}
-                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium'
+                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium hover:bg-green-600'
               >
                 Previous
               </button>
-              <span className='py-2'>
+              <span className='py-2 text-white'>
                 Page {page} of {totalPages}
               </span>
               <button
                 onClick={handleNextPage}
                 disabled={page === totalPages}
-                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium'
+                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium hover:bg-green-600'
               >
                 Next
               </button>

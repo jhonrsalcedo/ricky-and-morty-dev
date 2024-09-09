@@ -12,7 +12,9 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
     <div
       className={`bg-white rounded-lg shadow-md overflow-hidden ${
         isModal ? 'flex flex-col md:flex-row' : ''
-      } hover:shadow-lg transition-shadow duration-300`}
+      } hover:shadow-lg transition-shadow duration-300 hover:shadow-green-500`}
+      tabIndex={0}
+      aria-label={`Character Card for ${name}`}
     >
       <div className='w-full h-full'>
         <img src={image} alt={name} className={imageClasses} />
