@@ -50,7 +50,7 @@ function App() {
   }
 
   return (
-    <div className='container mx-auto px-4 py-8'>
+    <section className='container mx-auto px-4 py-8'>
       <h1 className='font-delicious text-5xl font-bold text-center mb-8 text-neon-green drop-shadow-neon'>
         Rick and Morty Characters
       </h1>
@@ -104,7 +104,7 @@ function App() {
       <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
         {selectedCharacter && <CharacterCard character={selectedCharacter} />}
       </Modal>
-    </div>
+    </section>
   )
 }
 

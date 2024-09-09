@@ -43,13 +43,13 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
   if (!isOpen && !isAnimating) return null
 
   return ReactDOM.createPortal(
-    <div
+    <section
       className={`fixed inset-0 bg-black transition-opacity duration-300 ease-in-out ${
         isOpen ? 'bg-opacity-50' : 'bg-opacity-0'
       } ${isAnimating ? 'visible' : 'invisible'}`}
       onClick={onClose}
     >
-      <div
+      <article
         className={`fixed inset-0 flex items-center justify-center transition-all duration-300 ease-in-out ${
           isOpen ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
         }`}
@@ -68,8 +68,8 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
           </div>
           <div className='flex flex-col items-center'>{children}</div>
         </div>
-      </div>
-    </div>,
+      </article>
+    </section>,
     document.getElementById('modal-root')!
   )
 }

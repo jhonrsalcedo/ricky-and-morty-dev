@@ -40,8 +40,8 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
   }
 
   return (
-    <div className='mb-8'>
-      <div className='flex flex-col md:flex-row'>
+    <section className='mb-8'>
+      <article className='flex flex-col md:flex-row'>
         <input
           type='text'
           value={name}
@@ -74,10 +74,10 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
         >
           Reset
         </button>
-      </div>
+      </article>
 
       {showFilters && (
-        <div className='p-4 bg-gray-100 rounded-md flex flex-col md:flex-row justify-around mt-2'>
+        <article className='p-4 bg-gray-100 rounded-md flex flex-col md:flex-row justify-around mt-2'>
           {(Object.keys(FILTER_OPTIONS) as Array<keyof Filters>).map(
             (category) => (
               <div
@@ -106,9 +106,9 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
               </div>
             )
           )}
-        </div>
+        </article>
       )}
-    </div>
+    </section>
   )
 }
 

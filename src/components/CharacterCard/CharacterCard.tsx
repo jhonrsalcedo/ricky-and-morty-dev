@@ -9,19 +9,19 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
   const contentClasses = isModal ? 'p-6' : 'p-4'
 
   return (
-    <div
+    <section
       className={`bg-slate-50 rounded-lg shadow-md overflow-hidden ${
         isModal ? 'flex flex-col md:flex-row' : ''
       } hover:shadow-lg transition-shadow duration-300 hover:shadow-green-500`}
       tabIndex={0}
       aria-label={`Character Card for ${name}`}
     >
-      <div className='w-full h-full'>
+      <article className='w-full h-full'>
         <figure className='m-5'>
           <img src={image} alt={name} className={imageClasses} />
         </figure>
-      </div>
-      <div className={contentClasses}>
+      </article>
+      <article className={contentClasses}>
         <h2 className='font-delius text-xl font-semibold mb-2'>{name}</h2>
         <p className='text-gray-600 '>
           Status:
@@ -40,8 +40,8 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
         <p className='text-gray-600'>Species: {species}</p>
         <p className='text-gray-600'>Gender: {gender}</p>
         <p className='text-gray-600'>Origin: {origin.name}</p>
-      </div>
-    </div>
+      </article>
+    </section>
   )
 }
 

@@ -5,6 +5,9 @@ This project is a web application that allows you to explore the characters of t
 If you wish to visit the site online you can access this link.
 https://ricky-and-morty-dev.netlify.app/
 
+> [!NOTE]
+> the site is 100% keyboard accessible, this means that you can use the keys to navigate through the site, from the start you can use the Tab key to navigate through the sections and enter to execute.
+
 ## Prerequisites
 
 Before starting, make sure you have installed on your system:
