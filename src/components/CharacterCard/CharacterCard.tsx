@@ -10,14 +10,16 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-md overflow-hidden ${
+      className={`bg-slate-50 rounded-lg shadow-md overflow-hidden ${
         isModal ? 'flex flex-col md:flex-row' : ''
       } hover:shadow-lg transition-shadow duration-300 hover:shadow-green-500`}
       tabIndex={0}
       aria-label={`Character Card for ${name}`}
     >
       <div className='w-full h-full'>
-        <img src={image} alt={name} className={imageClasses} />
+        <figure className='m-5'>
+          <img src={image} alt={name} className={imageClasses} />
+        </figure>
       </div>
       <div className={contentClasses}>
         <h2 className='font-delius text-xl font-semibold mb-2'>{name}</h2>
@@ -26,10 +28,10 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
           <span
             className={`ml-1 ${
               status === 'Alive'
-                ? 'text-green-500'
+                ? 'text-green-700'
                 : status === 'Dead'
-                ? 'text-red-500'
-                : 'text-blue-500'
+                ? 'text-red-600'
+                : 'text-blue-600'
             }`}
           >
             {status}

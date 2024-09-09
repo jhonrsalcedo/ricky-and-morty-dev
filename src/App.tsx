@@ -41,7 +41,6 @@ function App() {
   }
 
   const handleNextPage = () => {
-    console.log(page, totalPages)
     if (page < totalPages) setPage(page + 1)
   }
 

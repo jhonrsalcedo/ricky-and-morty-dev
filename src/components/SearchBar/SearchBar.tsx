@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { Filters } from '../../type'
 
 interface SearchBarProps {
@@ -37,15 +38,16 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
     onSearch('')
     onFilterChange({ status: '', species: '', gender: '' })
   }
+
   return (
     <div className='mb-8'>
-      <div className='flex'>
+      <div className='flex flex-col md:flex-row'>
         <input
           type='text'
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder='Search by name'
-          className='flex-grow p-2 border border-gray-300 rounded-l'
+          className='flex-grow p-2 border border-gray-300 rounded-l md:rounded-none md:rounded-l'
           aria-label='Search character by name'
           onKeyUp={(e) => {
             if (e.key === 'Enter') {
@@ -75,14 +77,17 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
       </div>
 
       {showFilters && (
-        <div className='p-4 bg-gray-100 rounded-md flex justify-around mt-2'>
+        <div className='p-4 bg-gray-100 rounded-md flex flex-col md:flex-row justify-around mt-2'>
           {(Object.keys(FILTER_OPTIONS) as Array<keyof Filters>).map(
             (category) => (
-              <div key={category}>
+              <div key={category} className='flex flex-col md:flex-row'>
                 <h3 className='font-bold mb-2 capitalize'>{category}</h3>
-                <div className=''>
+                <div className='flex flex-wrap'>
                   {FILTER_OPTIONS[category].map((filter) => (
-                    <label key={filter} className='flex items-center space-x-2'>
+                    <label
+                      key={filter}
+                      className='flex items-center space-x-2 m-1'
+                    >
                       <input
                         type='radio'
                         name={category}
