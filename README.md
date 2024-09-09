@@ -2,6 +2,9 @@
 
 This project is a web application that allows you to explore the characters of the Rick and Morty series, using the Rick and Morty public API.
 
+If you wish to visit the site online you can access this link.
+https://ricky-and-morty-dev.netlify.app/
+
 ## Prerequisites
 
 Before starting, make sure you have installed on your system:
