@@ -71,3 +71,6 @@ for running Test in UI Mode
 ```
 npm run e2e:ui
 ```
+### Analyze devices desktop
+![Test-Lighthouse](https://github.com/user-attachments/assets/164d2f21-ff4f-46ff-9888-8d7a30c63e4e)
+
