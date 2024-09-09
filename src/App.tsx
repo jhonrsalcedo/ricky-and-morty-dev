@@ -4,33 +4,7 @@ import SearchBar from './components/SearchBar/SearchBar'
 import Modal from './components/Modal/Modal'
 import Spinner from './components/Spinner/Spinner'
 import useCharacters from './hooks/useCharacters'
-
-interface Filters {
-  status: string
-  species: string
-  gender: string
-}
-
-interface Character {
-  id: number
-  name: string
-  status: string
-  species: string
-  type: string
-  gender: string
-  origin: {
-    name: string
-    url: string
-  }
-  location: {
-    name: string
-    url: string
-  }
-  image: string
-  episode: string[]
-  url: string
-  created: string
-}
+import { Character, Filters } from './type'
 
 function App() {
   const [page, setPage] = useState(1)
@@ -67,6 +41,7 @@ function App() {
   }
 
   const handleNextPage = () => {
+    console.log(page, totalPages)
     if (page < totalPages) setPage(page + 1)
   }
 
@@ -77,7 +52,7 @@ function App() {
 
   return (
     <div className='container mx-auto px-4 py-8'>
-      <h1 className='text-4xl font-bold text-center mb-8'>
+      <h1 className='font-delicious text-5xl font-bold text-center mb-8 text-neon-green drop-shadow-neon'>
         Rick and Morty Characters
       </h1>
       <SearchBar onSearch={handleSearch} onFilterChange={handleFilterChange} />

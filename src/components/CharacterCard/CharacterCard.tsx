@@ -18,7 +18,7 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
         <img src={image} alt={name} className={imageClasses} />
       </div>
       <div className={contentClasses}>
-        <h2 className='text-xl font-semibold mb-2'>{name}</h2>
+        <h2 className='font-delius text-xl font-semibold mb-2'>{name}</h2>
         <p className='text-gray-500 font-medium'>
           Status:
           <span
