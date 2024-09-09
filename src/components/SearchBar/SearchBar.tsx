@@ -80,8 +80,11 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
         <div className='p-4 bg-gray-100 rounded-md flex flex-col md:flex-row justify-around mt-2'>
           {(Object.keys(FILTER_OPTIONS) as Array<keyof Filters>).map(
             (category) => (
-              <div key={category} className='flex flex-col md:flex-row'>
-                <h3 className='font-bold mb-2 capitalize'>{category}</h3>
+              <div
+                key={category}
+                className='flex flex-col md:flex-row items-center'
+              >
+                <h3 className='font-bold capitalize font-delius'>{category}</h3>
                 <div className='flex flex-wrap'>
                   {FILTER_OPTIONS[category].map((filter) => (
                     <label
@@ -94,7 +97,7 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
                         value={filter}
                         checked={selectedFilters[category] === filter}
                         onChange={() => handleFilterToggle(category, filter)}
-                        className='accent-green-500'
+                        className='accent-green-500 ml-2'
                       />
                       <span className='capitalize'>{filter || 'any'}</span>
                     </label>

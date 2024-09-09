@@ -23,10 +23,10 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
       </div>
       <div className={contentClasses}>
         <h2 className='font-delius text-xl font-semibold mb-2'>{name}</h2>
-        <p className='text-gray-500 font-medium'>
+        <p className='text-gray-600 '>
           Status:
           <span
-            className={`ml-1 ${
+            className={`ml-1 font-bold ${
               status === 'Alive'
                 ? 'text-green-700'
                 : status === 'Dead'
@@ -37,9 +37,9 @@ function CharacterCard({ character, isModal = false }: CharacterCardProps) {
             {status}
           </span>
         </p>
-        <p className='text-gray-500 font-medium'>Species: {species}</p>
-        <p className='text-gray-500 font-medium'>Gender: {gender}</p>
-        <p className='text-gray-500 font-medium'>Origin: {origin.name}</p>
+        <p className='text-gray-600'>Species: {species}</p>
+        <p className='text-gray-600'>Gender: {gender}</p>
+        <p className='text-gray-600'>Origin: {origin.name}</p>
       </div>
     </div>
   )
