@@ -1,5 +1,6 @@
-import { useState } from 'react'
-import { UseCharactersResult, Character, Filters } from '../type'
+import { useCallback, useState } from 'react'
+
+import { UseCharactersResult, Character, Filters } from '@/type'
 
 function useCharacters(): UseCharactersResult {
   const [characters, setCharacters] = useState<Character[]>([])
@@ -7,7 +8,7 @@ function useCharacters(): UseCharactersResult {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchCharacters = async (
+  const fetchCharacters = useCallback(async (
     page: number,
     name: string,
     filters: Filters
@@ -38,7 +39,7 @@ function useCharacters(): UseCharactersResult {
     } finally {
       setIsLoading(false)
     }
-  }
+  }, [])
 
   return { characters, totalPages, isLoading, error, fetchCharacters }
 }

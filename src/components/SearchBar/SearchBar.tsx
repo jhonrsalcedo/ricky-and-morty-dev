@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
-import { Filters } from '../../type'
+import Button from '@/components/Button'
+import { Filters } from '@/type'
 
 interface SearchBarProps {
   onSearch: (name: string) => void
@@ -55,35 +56,34 @@ function SearchBar({ onSearch, onFilterChange }: SearchBarProps) {
             }
           }}
         />
-        <button
+        <Button
+          variant='primary'
+          className='rounded-r'
           onClick={handleSearch}
-          className='px-4 py-2 bg-green-700 text-white rounded-r font-medium hover:bg-green-600'
           aria-label='Search for characters'
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              handleSearch()
-            }
+            if (e.key === 'Enter') handleSearch()
           }}
         >
           Search
-        </button>
-        <button
+        </Button>
+        <Button
+          variant='secondary'
+          className='ml-2'
           onClick={() => setShowFilters(!showFilters)}
-          className='px-4 py-2 bg-gray-200 text-gray-700 ml-2 rounded font-medium hover:bg-gray-300'
         >
           {showFilters ? 'Hide Filters' : 'Show Filters'}
-        </button>
-        <button
+        </Button>
+        <Button
+          variant='danger'
+          className='ml-2'
           onClick={handleReset}
-          className='px-4 py-2 bg-red-600 text-white ml-2 rounded font-medium hover:bg-red-500'
           onKeyUp={(e) => {
-            if (e.key === 'Enter') {
-              handleReset()
-            }
+            if (e.key === 'Enter') handleReset()
           }}
         >
           Reset
-        </button>
+        </Button>
       </article>
 
       {showFilters && (

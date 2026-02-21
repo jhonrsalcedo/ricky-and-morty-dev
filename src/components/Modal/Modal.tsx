@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ReactDOM from 'react-dom'
+
+import Button from '@/components/Button'
 
 interface ModalProps {
   isOpen: boolean
@@ -9,6 +11,16 @@ interface ModalProps {
 
 function Modal({ isOpen, onClose, children }: ModalProps) {
   const [isAnimating, setIsAnimating] = useState(false)
+
+
+
+  const handleKeyDown = useCallback((event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      onClose()
+    }
+  }, [onClose])
+
+  
 
   useEffect(() => {
     if (isOpen) {
@@ -32,14 +44,9 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
       document.body.style.overflow = 'unset'
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [isOpen])
+  }, [isOpen, handleKeyDown])
 
-  const handleKeyDown = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
-      onClose()
-    }
-  }
-
+ 
   if (!isOpen && !isAnimating) return null
 
   return ReactDOM.createPortal(
@@ -57,14 +64,14 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
       >
         <div className='bg-white rounded-lg p-6 max-w-lg m-4 flex flex-col'>
           <div className='flex justify-end'>
-            <button
+            <Button
+              variant='icon'
+              className='relative mb-2'
               onClick={onClose}
-              className='text-xl font-bold rounded-full w-8 h-8 flex items-center justify-center transition-opacity duration-300 hover:bg-gray-200 hover:opacity-80 relative mb-2'
+              aria-label='Close modal'
             >
-              <span className='inline-block leading-none absolute bottom-2'>
-                &times;
-              </span>
-            </button>
+              <span className='inline-block leading-none'>&times;</span>
+            </Button>
           </div>
           <div className='flex flex-col items-center'>{children}</div>
         </div>

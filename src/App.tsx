@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
-import CharacterCard from './components/CharacterCard/CharacterCard'
-import SearchBar from './components/SearchBar/SearchBar'
-import Modal from './components/Modal/Modal'
-import Spinner from './components/Spinner/Spinner'
-import useCharacters from './hooks/useCharacters'
-import { Character, Filters } from './type'
+
+import Button from '@/components/Button'
+import CharacterCard from '@/components/CharacterCard'
+import SearchBar from '@/components/SearchBar'
+import Modal from '@/components/Modal'
+import Spinner from '@/components/Spinner'
+import useCharacters from '@/hooks/useCharacters'
+import { Character, Filters } from '@/type'
 
 function App() {
   const [page, setPage] = useState(1)
@@ -24,7 +26,7 @@ function App() {
 
   useEffect(() => {
     fetchCharacters(page, searchName, searchFilters)
-  }, [page, searchName, searchFilters])
+  }, [fetchCharacters, page, searchName, searchFilters])
 
   const handleSearch = (name: string) => {
     setSearchName(name)
@@ -80,23 +82,23 @@ function App() {
           </article>
           {characters.length > 0 && (
             <div className='mt-8 flex justify-center space-x-4'>
-              <button
+              <Button
+                variant='primary'
                 onClick={handlePrevPage}
                 disabled={page === 1}
-                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium hover:bg-green-600'
               >
                 Previous
-              </button>
+              </Button>
               <span className='py-2 text-white'>
                 Page {page} of {totalPages}
               </span>
-              <button
+              <Button
+                variant='primary'
                 onClick={handleNextPage}
                 disabled={page === totalPages}
-                className='px-4 py-2 bg-green-700 text-white rounded disabled:bg-gray-300 font-medium hover:bg-green-600'
               >
                 Next
-              </button>
+              </Button>
             </div>
           )}
         </>

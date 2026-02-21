@@ -35,7 +35,7 @@ test('The filter is working', async ({ page }) => {
   ).toBeVisible()
   expect(await modal.count()).toBe(1)
 
-  await page.getByRole('button', { name: '×' }).click()
+  await page.getByRole('button', { name: 'Close modal' }).click()
   await modal.waitFor({ state: 'detached' })
 
   expect(await modal.count()).toBe(0)
@@ -58,5 +58,5 @@ test('The Search', async ({ page }) => {
   await expect(
     page.locator('#modal-root').getByRole('heading', { name: 'Summer Smith' })
   ).toBeVisible()
-  await page.getByRole('button', { name: '×' }).click()
+  await page.getByRole('button', { name: 'Close modal' }).click()
 })
